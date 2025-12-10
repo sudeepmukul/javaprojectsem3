@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en" class="bg-[#050505] text-white overflow-x-hidden selection:bg-[#fbff00] selection:text-black">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zency Studios | Creative Agency</title>
+    <meta name="description" content="Zency Studios - High-end Graphics & Video Editing">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Oswald:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'zency-black': '#050505',
+                        'zency-yellow': '#fbff00',
+                        'zency-gray': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        sans: ['Satoshi', 'Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for 3D and Scroll -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #050505;
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* Custom Cursor */
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: exclusion;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        .cursor-follower.active {
+            width: 80px;
+            height: 80px;
+            background: #fbff00;
+            mix-blend-mode: normal;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .cursor-follower.active::after {
+            content: 'VIEW';
+        }
+
+        /* 3D Scene */
+        .viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 2000px;
+            /* Deep perspective */
+        }
+
+        .world {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* Gallery Cards */
+        .card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 40vw;
+            /* Responsive width */
+            max-width: 600px;
+            aspect-ratio: 16/9;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            overflow: hidden;
+            /* Border for 'framed' look */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            .card {
+                width: 80vw;
+            }
+        }
+    </style>
+</head>
+
+<body class="cursor-none"> <!-- Hide default cursor -->
+
+    <!-- Custom Cursor Element -->
+    <div class="cursor-follower"></div>
+
+    <!-- Scroll Spacer (Drives the ScrollTrigger) -->
+    <div id="scroll-dist" class="h-[1000vh]"></div>
+
+    <!-- Fixed Viewport for 3D Content -->
+    <div class="viewport" id="viewport">
+        <div class="world" id="world">
+
+            <!-- Items positioned in Z-space via JS -->
+
+            <!-- Intro / Hero Item (Starts at Z: 0) -->
+            <div
+                class="card intro-card bg-transparent border-none flex flex-col items-center justify-center text-center">
+                <h1
+                    class="font-display text-[12vw] leading-[0.8] uppercase font-bold tracking-tighter mix-blend-difference whitespace-nowrap">
+                    ZENCY <span
+                        class="text-transparent bg-clip-text bg-gradient-to-t from-[#fbff00] to-white">STUDIOS</span>
+                </h1>
+                <p class="font-sans text-xs md:text-sm mt-8 tracking-[0.3em] uppercase opacity-70">
+                    Flagship Creative Agency Portfolio
+                </p>
+                <!-- Scroll Indicator -->
+                <div class="mt-12 animate-bounce opacity-50">
+                    ↓ SCROLL TO ENTER
+                </div>
+            </div>
+
+            <!-- Gallery Item 1 -->
+            <div class="card gallery-item group">
+                <img src="https://framerusercontent.com/images/7XBssWu4rFyLny26byD00Jk.webp?width=1831&height=894"
+                    class="w-full h-full object-cover">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-display text-4xl uppercase text-white">Esports Branding</span>
+                </div>
+            </div>
+
+            <!-- Gallery Item 2 -->
+            <div class="card gallery-item group">
+                <img src="https://framerusercontent.com/images/C5AG33P62P4bESQQ08rM0r8Ls.webp?width=1066&height=1600"
+                    class="w-full h-full object-cover">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-display text-4xl uppercase text-white">Vertical Content</span>
+                </div>
+            </div>
+
+            <!-- Gallery Item 3 -->
+            <div class="card gallery-item group">
+                <img src="https://framerusercontent.com/images/uIuf2Kb12Pmze9eeOhYWf4RzxoQ.webp?width=1599&height=899"
+                    class="w-full h-full object-cover">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-display text-4xl uppercase text-white">Visual Identity</span>
+                </div>
+            </div>
+
+            <!-- Gallery Item 4 -->
+            <div class="card gallery-item group">
+                <img src="https://framerusercontent.com/images/JpmTCz1DdgKI6bx6Y2K6D28O6k.webp?width=1080&height=1080"
+                    class="w-full h-full object-cover">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-display text-4xl uppercase text-white">Social Assets</span>
+                </div>
+            </div>
+
+            <!-- Gallery Item 5 -->
+            <div class="card gallery-item group">
+                <img src="https://framerusercontent.com/images/iQFVuHMtmctN2LrRDuGBLb8XlE.webp?width=724&height=1000"
+                    class="w-full h-full object-cover">
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="font-display text-4xl uppercase text-white">Typography</span>
+                </div>
+            </div>
+
+            <!-- About / Founders Section -->
+            <div class="card about-card bg-black border-2 border-[#fbff00] p-8 flex flex-col justify-between">
+                <div class="font-display text-4xl uppercase text-[#fbff00]">The Founders</div>
+                <div class="flex gap-4 mt-4 h-full">
+                    <div class="flex-1 bg-gray-800 rounded overflow-hidden relative">
+                        <img src="https://framerusercontent.com/images/iV89mtRO33laTDx8CyEKXozfY.webp?width=864&height=1152"
+                            class="w-full h-full object-cover opacity-60">
+                        <span class="absolute bottom-2 left-2 font-bold text-xs uppercase">Sudeep</span>
+                    </div>
+                    <div class="flex-1 bg-gray-800 rounded overflow-hidden relative">
+                        <img src="https://framerusercontent.com/images/E38Gn4xsz65GDyhf3sE4XkJuY.webp?width=864&height=1152"
+                            class="w-full h-full object-cover opacity-60">
+                        <span class="absolute bottom-2 left-2 font-bold text-xs uppercase">Azeem</span>
+                    </div>
+                    <div class="flex-1 bg-gray-800 rounded overflow-hidden relative">
+                        <img src="https://framerusercontent.com/images/j6KncHUcNe1LI1FhEXv8yTjvcE4.webp?width=864&height=1152"
+                            class="w-full h-full object-cover opacity-60">
+                        <span class="absolute bottom-2 left-2 font-bold text-xs uppercase">Farhan</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-right">
+                    <a href="mailto:workwithzency@gmail.com"
+                        class="inline-block px-6 py-2 bg-white text-black font-bold uppercase hover:bg-[#fbff00] transition-colors relative z-50 pointer-events-auto cursor-pointer">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- UI Overlay (Fixed on top of 3D world) -->
+    <nav class="fixed top-0 w-full p-6 flex justify-between items-center z-50 mix-blend-difference pointer-events-none">
+        <div class="font-display text-2xl font-bold tracking-tighter pointer-events-auto cursor-pointer">ZENCY</div>
+        <div class="hidden md:flex gap-6 text-xs font-mono">
+            <span class="opacity-50">SCROLL VELOCITY: <span id="velocity-display">0</span></span>
+        </div>
+        <a href="#contact"
+            class="pointer-events-auto cursor-pointer border border-white px-4 py-1 rounded-full text-xs font-bold hover:bg-white hover:text-black transition-colors">MENU</a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
